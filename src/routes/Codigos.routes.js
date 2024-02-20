@@ -12,8 +12,7 @@ router.get("/codigos/", codesController.getAllCodes);
 //UPDATE
 router.put("/codigos/:code", codesController.updateCode);
 
-
-
 //DELETE
+router.delete("/codigos/:code", codesController.deleteCode);
 
-module.exports = router
+module.exports = router;

@@ -42,8 +42,8 @@ const updateCode = async (req, res) => {
     const productos = await Codigos.find();
     const producto = productos.find((e) => e.code == code);
     if (producto) {
-        producto.code = req.body.code || producto.code;
-        producto.description = req.body.description || producto.description
+      producto.code = req.body.code || producto.code;
+      producto.description = req.body.description || producto.description;
       await producto.save();
       res.status(200).json({ message: "Producto actualizado" });
     } else {
@@ -55,9 +55,26 @@ const updateCode = async (req, res) => {
 };
 
 //DELETE
+const deleteCode = async (req, res) => {
+  try {
+    const code = req.params.code;
+    const productos = await Codigos.find();
+    const producto = productos.find((e) => e.code == code);
+    if (producto) {
+      await Codigos.findOneAndDelete({ code: code });
+      res.status(200).json({ message: "Producto eliminado" });
+    } else {
+      res.status(404).json({ error: "Producto no encontrado" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ error: "Producto no encontrado" });
+  }
+};
 
 module.exports = {
   createCode,
   getAllCodes,
   updateCode,
+  deleteCode,
 };
