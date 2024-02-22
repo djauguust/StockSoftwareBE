@@ -9,7 +9,7 @@ const comprasModel = new Schema(
       unique: true,
     },
     fechaHora: {
-      type: Date,
+      type: String,
       require: true,
     },
     codigo: {

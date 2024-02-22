@@ -33,6 +33,10 @@ const initApp = async () => {
   }
 };
 
-initApp(); 
+initApp();
 
-app.use("/api", require("./src/routes/Codigos.routes.js"));
+app.use(
+  "/api",
+  require("./src/routes/Codigos.routes.js"),
+  require("./src/routes/Compras.routes.js")
+);
