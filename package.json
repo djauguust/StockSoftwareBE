@@ -7,6 +7,14 @@
     "start": "babel-node index.js",
     "dev": "nodemon --exec babel-node index.js"
   },
+  "keywords": [
+    "request",
+    "response",
+    "GET",
+    "POST",
+    "PATCH",
+    "DELETE"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
