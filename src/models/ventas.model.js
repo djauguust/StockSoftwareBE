@@ -3,33 +3,32 @@ const { Schema } = mongoose;
 
 const ventasModel = new Schema(
   {
-    id: {
-      type: Number,
-      required: true,
-      unique: true,
-    },
     fechaHora: {
-      type: Date,
-      require: true,
+      type: String,
+      required: true,
     },
     productos: [
       {
         codigo: {
           type: Number,
           min: 0,
-          max: 999999999,
+          max: 9999999999,
         },
         cantidad: {
           type: Number,
-          min: 1,
+          min: 0,
+        },
+        peso: {
+          type: Number,
+          min: 0,
+        },
+        precio: {
+          type: Number,
         },
       },
     ],
-    precio: {
-      type: Number,
-    },
-    user: {
-      type: Number,
+    userId: {
+      type: String,
     },
   },
   { versionKey: false }
