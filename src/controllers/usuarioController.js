@@ -52,9 +52,9 @@ const login = async (req, res) => {
     );
     res.header("auth-token", token).json({
       message: "Usuario logueado con éxito",
-      data: { token, nombre: user.nombre, rol: user.esAdmin },
+      data: { token, nombre: user.nombre, rol: user.esAdmin, id: user._id },
     });
-  } catch (error) {}
+  } catch (error) { }
 };
 
 //GET

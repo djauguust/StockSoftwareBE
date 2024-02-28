@@ -3,14 +3,9 @@ const { Schema } = mongoose;
 
 const comprasModel = new Schema(
   {
-    id: {
-      type: Number,
-      required: true,
-      unique: true,
-    },
     fechaHora: {
       type: String,
-      require: true,
+      required: true,
     },
     codigo: {
       type: Number,
@@ -28,7 +23,7 @@ const comprasModel = new Schema(
       type: Number,
     },
     user: {
-      type: Number,
+      type: String,
     },
   },
   { versionKey: false }

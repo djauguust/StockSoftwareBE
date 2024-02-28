@@ -5,7 +5,7 @@ import morgan from "morgan";
 const mongoose = require("mongoose");
 const connectDb = require("./src/database/db.js");
 
-console.log("first");
+console.log("Conectando...");
 
 const app = express();
 
@@ -21,7 +21,7 @@ const initApp = async () => {
     await connectDb();
     app
       .listen(app.get("port"), () => {
-        console.log(`Estoy escuchando el puerto ${app.get("port")}`);
+        console.log(`Estoy escuchando localmente el puerto ${app.get("port")}`);
       })
       .on("error", (error) => {
         console.log("ERROR : ", error);
@@ -37,7 +37,7 @@ initApp();
 
 app.use(
   "/api",
+  require("./src/routes/Compras.routes.js"),
   require("./src/routes/Codigos.routes.js"),
   require("./src/routes/Usuario.routes.js"),
-  require("./src/routes/Compras.routes.js")
 );

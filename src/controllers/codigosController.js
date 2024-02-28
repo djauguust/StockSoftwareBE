@@ -5,6 +5,7 @@ const Codigos = require("../models/codigos.model");
 const createCode = async (req, res) => {
   try {
     const { code, description } = req.body;
+    console.log(code)
     const allCodes = await Codigos.find();
     let usuarioRepetido = allCodes.find(
       (e) => e.code == code || e.description == description
@@ -29,7 +30,7 @@ const createCode = async (req, res) => {
 const getAllCodes = async (req, res) => {
   try {
     const allCodes = await Codigos.find();
-    console.log(allCodes);
+    
     res.status(200).json(allCodes);
   } catch (error) {
     res.status(400).json({ message: error.message });

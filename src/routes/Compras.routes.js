@@ -4,15 +4,15 @@ const router = express.Router();
 const comprasController = require("../controllers/comprasController");
 
 //POST
-/* router.post("/codigos/", codesController.createCode); */
+router.post("/compras/", comprasController.createCompra);
 
 //GET
-/* router.get("/codigos/", codesController.getAllCodes); */
+router.get("/compras/", comprasController.getAllCompras);
 
 //UPDATE
 /* router.put("/codigos/:code", codesController.updateCode); */
 
 //DELETE
-/* router.delete("/codigos/:code", codesController.deleteCode); */
+router.delete("/compras/:id", comprasController.deleteCompra);
 
 module.exports = router;
