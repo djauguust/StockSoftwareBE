@@ -82,6 +82,7 @@ const getAllVentas = async (req, res) => {
 
             ventasModificadas.push(aux)
         })
+        /* TO DO Faltaría hacer lo del stock */
         res.status(200).json(ventasModificadas);
     } catch (error) {
         res.status(400).json({ message: error.message });
