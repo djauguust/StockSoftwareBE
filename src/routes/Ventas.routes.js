@@ -13,6 +13,6 @@ router.get("/ventas/", ventasController.getAllVentas);
 /* router.put("/codigos/:code", codesController.updateCode); */
 
 //DELETE
-router.delete("/compras/:id", ventasController.deleteCompra);
+router.delete("/ventas/:id", ventasController.deleteVenta);
 
 module.exports = router;

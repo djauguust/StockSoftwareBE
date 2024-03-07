@@ -78,6 +78,7 @@ const getAllVentas = async (req, res) => {
                     apellido: userAux.apellido,
                 },
                 precioTotal: precioTotal,
+                id: c._id
             }
 
             ventasModificadas.push(aux)
@@ -109,25 +110,25 @@ const updateCode = async (req, res) => {
 };
 
 //DELETE
-const deleteCompra = async (req, res) => {
+const deleteVenta = async (req, res) => {
     try {
         const id = req.params.id;
-        const productos = await Compras.find();
+        const productos = await Ventas.find();
         const producto = productos.find((e) => e._id == id);
         if (producto) {
-            await Compras.findOneAndDelete({ _id: id });
-            res.status(200).json({ message: "Compra eliminada" });
+            await Ventas.findOneAndDelete({ _id: id });
+            res.status(200).json({ message: "Venta eliminada" });
         } else {
-            res.status(404).json({ error: "Compra no encontrada" });
+            res.status(404).json({ error: "Venta no encontrada" });
         }
     } catch (error) {
         console.log(error);
-        res.status(404).json({ error: "Compra no encontrada" });
+        res.status(404).json({ error: "Venta no encontrada" });
     }
 };
 
 module.exports = {
     getAllVentas,
     createVenta,
-    deleteCompra,
+    deleteVenta,
 };
