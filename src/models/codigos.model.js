@@ -7,7 +7,7 @@ const codigosModel = new Schema(
       type: Number,
       required: true,
       min: 0,
-      max: 9999999999,
+      max: 9999999999999,
     },
     description: {
       type: String,
