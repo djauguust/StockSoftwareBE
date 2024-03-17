@@ -41,4 +41,5 @@ app.use(
   require("./src/routes/Codigos.routes.js"),
   require("./src/routes/Usuario.routes.js"),
   require("./src/routes/Ventas.routes.js"),
+  require("./src/routes/Negocios.routes.js"),
 );
