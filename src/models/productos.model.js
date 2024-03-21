@@ -9,10 +9,6 @@ const productosModel = new Schema(
       min: 0,
       max: 9999999999,
     },
-    descripcion: {
-      type: String,
-      required: true,
-    },
     cantidad: {
       type: Number,
     },
@@ -21,6 +17,7 @@ const productosModel = new Schema(
     },
     precio: {
       type: Number,
+      required: true
     },
   },
   { versionKey: false }
