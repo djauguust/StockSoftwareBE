@@ -8,8 +8,10 @@ const Productos = require("../models/productos.model");
 const createVenta = async (req, res) => {
   try {
     const { fechaHora, productos, user } = req.body;
-    let b = 0;
+    let b = 0,
+      a = 0;
     const allProducts = await Productos.find();
+    const allCodes = await Codigos.find();
     if (!(productos == undefined)) {
       productos.map((p) => {
         if (
@@ -28,7 +30,6 @@ const createVenta = async (req, res) => {
           productos,
           userId: user,
         });
-        await venta.save();
         // TO DO PLASMAR VENTA EN STOCK
         productos.map(async (p) => {
           let i = allProducts.find((c) => c.codigo == p.codigo);
@@ -46,16 +47,33 @@ const createVenta = async (req, res) => {
             );
           } else {
             // si no existe, creo
-            if (p.isCantidad) {
-              p.cantidad = 0;
+            let aux = allCodes.find((c) => c.code == p.codigo);
+            console.log(allCodes);
+            console.log(p);
+            if (aux) {
+              if (p.isCantidad) {
+                p.cantidad = 0;
+              } else {
+                p.peso = 0;
+              }
+              await Productos.create(p);
             } else {
-              p.peso = 0;
+              a = 1;
             }
-            await Productos.create(p);
           }
         });
         /* FIN TODO */
-        res.status(201).json({ message: "¡Venta Creada!" });
+        if (a == 0) {
+          await venta.save();
+          res.status(201).json({ message: "¡Venta Creada!" });
+        } else {
+          res
+            .status(400)
+            .json({
+              message:
+                "Existe al menos un producto de la venta con código inexistente ",
+            });
+        }
       }
     } else {
       res.status(400).json({ message: "Debe enviar los productos vendidos" });
