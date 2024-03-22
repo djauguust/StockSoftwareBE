@@ -11,6 +11,10 @@ const createCompra = async (req, res) => {
   try {
     const { fechaHora, codigo, cantidad, peso, precio, user, isCantidad } =
       req.body;
+    if (cantidad < 0 || peso < 0) {
+      res.status(400).json({ message: "No enviar cantidad/peso negativos" });
+      return;
+    }
     const allProducts = await Productos.find();
     const allCodes = await Codigos.find();
     const negocio = await Negocio.find();
