@@ -17,7 +17,11 @@ const productosModel = new Schema(
     },
     precio: {
       type: Number,
-      required: true
+      required: true,
+    },
+    isCantidad: {
+      type: Boolean,
+      required: true,
     },
   },
   { versionKey: false }
