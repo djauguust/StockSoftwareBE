@@ -13,6 +13,10 @@ const codigosModel = new Schema(
       type: String,
       required: true,
     },
+    isCantidad: {
+      type: Boolean,
+      required: true
+    }
   },
   { versionKey: false }
 );

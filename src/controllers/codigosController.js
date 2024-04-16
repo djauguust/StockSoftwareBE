@@ -4,7 +4,7 @@ const Codigos = require("../models/codigos.model");
 
 const createCode = async (req, res) => {
   try {
-    const { code, description } = req.body;
+    const { code, description, isCantidad } = req.body;
     console.log(code)
     const allCodes = await Codigos.find();
     let usuarioRepetido = allCodes.find(
@@ -16,6 +16,7 @@ const createCode = async (req, res) => {
       const codigo = new Codigos({
         code,
         description,
+        isCantidad,
       });
       await codigo.save();
       res.status(201).json({ message: "¡Producto Creado!" });
@@ -30,7 +31,7 @@ const createCode = async (req, res) => {
 const getAllCodes = async (req, res) => {
   try {
     const allCodes = await Codigos.find();
-    
+
     res.status(200).json(allCodes);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -46,6 +47,11 @@ const updateCode = async (req, res) => {
     if (producto) {
       producto.code = req.body.code || producto.code;
       producto.description = req.body.description || producto.description;
+      if (req.body.isCantidad) {
+        producto.isCantidad = true
+      } else {
+        producto.isCantidad = false
+      }
       await producto.save();
       res.status(200).json({ message: "Producto actualizado" });
     } else {

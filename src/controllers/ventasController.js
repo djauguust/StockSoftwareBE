@@ -48,7 +48,6 @@ const createVenta = async (req, res) => {
           } else {
             // si no existe, creo
             let aux = allCodes.find((c) => c.code == p.codigo);
-            console.log(allCodes);
             console.log(p);
             if (aux) {
               if (p.isCantidad) {
@@ -109,6 +108,7 @@ const getAllVentas = async (req, res) => {
           cantidad: p.cantidad,
           codigo: p.codigo,
           producto: descripAux.description,
+          isCantidad: descripAux.isCantidad
         };
         precioTotal += p.precio;
         productosToSend.push(aux2);

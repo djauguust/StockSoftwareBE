@@ -48,7 +48,7 @@ const createCompra = async (req, res) => {
         }
         await Productos.findOneAndUpdate(
           { codigo: i.codigo },
-          { cantidad: i.cantidad, peso: i.peso }
+          { cantidad: i.cantidad, peso: i.peso, precio: precio * (1 + aumento / 100) }
         );
       } else {
         // si no existe, creo
