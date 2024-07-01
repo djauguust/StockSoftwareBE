@@ -48,7 +48,11 @@ const createCompra = async (req, res) => {
         }
         await Productos.findOneAndUpdate(
           { codigo: i.codigo },
-          { cantidad: i.cantidad, peso: i.peso, precio: precio * (1 + aumento / 100) }
+          {
+            cantidad: i.cantidad,
+            peso: i.peso,
+            precio: precio * (1 + aumento / 100),
+          }
         );
       } else {
         // si no existe, creo
@@ -88,6 +92,7 @@ const createCompra = async (req, res) => {
     }
   } catch (error) {
     res.status(404).json({ message: error.message });
+    console.log(error);
   }
 };
 

@@ -31,12 +31,10 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const user = await Usuarios.findOne({ email: req.body.email });
-    console.log(user);
     if (!user) {
       return res.status(404).send("Usuario y/o contraseña incorrectos");
     }
     const match = await bcrypt.compare(req.body.contrasenia, user.contrasenia);
-    console.log(match);
     if (!match) {
       return res.status(404).send("Usuario y/o contraseña incorrectos");
     }
@@ -54,7 +52,7 @@ const login = async (req, res) => {
       message: "Usuario logueado con éxito",
       data: { token, nombre: user.nombre, rol: user.esAdmin, id: user._id },
     });
-  } catch (error) { }
+  } catch (error) {}
 };
 
 //GET

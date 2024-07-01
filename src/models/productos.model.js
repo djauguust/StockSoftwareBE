@@ -7,7 +7,6 @@ const productosModel = new Schema(
       type: Number,
       required: true,
       min: 0,
-      max: 9999999999,
     },
     cantidad: {
       type: Number,
