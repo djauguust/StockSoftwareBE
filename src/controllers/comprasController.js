@@ -11,6 +11,17 @@ const createCompra = async (req, res) => {
   try {
     const { fechaHora, codigo, cantidad, peso, precio, user, isCantidad } =
       req.body;
+    /* if (!isCantidad) {
+      res.status(400).json({ message: "Enviar 'isCantidad'" });
+      return;
+
+    } */
+    let aux2; // Para setear 'isCantidad'
+    if (cantidad == undefined) {
+      aux2 = false
+    } else {
+      aux2 = true
+    }
     if (cantidad < 0 || peso < 0) {
       res.status(400).json({ message: "No enviar cantidad/peso negativos" });
       return;
@@ -27,6 +38,7 @@ const createCompra = async (req, res) => {
     ) {
       res.status(400).json({ message: "Debe enviar cantidad o peso" });
     } else {
+
       const compra = new Compras({
         fechaHora,
         codigo,
@@ -34,7 +46,7 @@ const createCompra = async (req, res) => {
         peso,
         precio,
         user,
-        isCantidad,
+        isCantidad: aux2,
       });
 
       // TO DO PLASMAR COMPRA EN STOCK
@@ -42,9 +54,9 @@ const createCompra = async (req, res) => {
       if (i) {
         // si existe, modifico
         if (i.isCantidad) {
-          i.cantidad += cantidad;
+          i.cantidad += parseInt(cantidad);
         } else {
-          i.peso += peso;
+          i.peso += parseInt(peso);
         }
         await Productos.findOneAndUpdate(
           { codigo: i.codigo },
@@ -53,26 +65,27 @@ const createCompra = async (req, res) => {
       } else {
         // si no existe, creo
         let aux = allCodes.find((c) => c.code == codigo);
-
+        console.log(aux)
         if (aux) {
           let p = {
             codigo: codigo,
             precio: precio * (1 + aumento / 100),
-            isCantidad: isCantidad,
+            isCantidad: aux2,
             cantidad: 0,
             peso: 0,
           };
           console.log(p);
           console.log(aumento);
-          if (isCantidad) {
+          if (aux2) {
             p.cantidad = cantidad;
             p.peso = 0;
           } else {
             p.cantidad = 0;
             p.peso = peso;
           }
-
+          console.log(p)
           await Productos.create(p);
+          console.log("76")
         } else {
           a = 1;
         }

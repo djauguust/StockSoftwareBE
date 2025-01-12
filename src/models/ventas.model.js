@@ -12,7 +12,7 @@ const ventasModel = new Schema(
         codigo: {
           type: Number,
           min: 0,
-          max: 9999999999,
+          // max: 9999999999,
         },
         cantidad: {
           type: Number,
